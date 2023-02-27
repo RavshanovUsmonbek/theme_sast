@@ -20,6 +20,7 @@ class SourceGitSSH(SourceABC):
     repo: str
     private_key: str
     branch: Optional[str] = 'main'
+    password: Optional[str]
 
     @property
     def execution_json(self):
@@ -27,7 +28,8 @@ class SourceGitSSH(SourceABC):
             'git': {
                 'repo': self.repo,
                 'repo_branch': self.branch,
-                'repo_key': self.private_key
+                'repo_key': self.private_key,
+                'password': self.password
             }
         }
 
@@ -50,11 +52,12 @@ class SourceGitHTTPS(SourceABC):
 
 class SourceArtifact(SourceABC):
     file: str
+    file_meta: Optional[dict]
 
     @property
     def execution_json(self):
         return {
-            'artifact': self.file
+            'artifact': {'file': self.file, 'file_meta': self.file_meta}
         }
 
 
