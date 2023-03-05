@@ -31,6 +31,12 @@ const SourceCard = {
                 input_mapping: {
                     path: '#local_file'
                 },
+            },
+            container: {
+                tab_id: 'nav-container-image-tab',
+                input_mapping: {
+                    image_name: '#container_image'
+                },
             }
         }
         const get_active_tab = (active_tab_id = undefined) => {
@@ -91,6 +97,7 @@ const SourceCard = {
                 el.find('input#file').val('')
                 el.find('span#source-current-file').text('Nothing selected')
                 el.find('input#local_file').val('')
+                el.find('input#container_image').val('')
                 el.find('a#nav-git-tab').tab('show')
                 el.find('a#' + tab_mapping['git_ssh']?.tab_id).tab('show')
             },

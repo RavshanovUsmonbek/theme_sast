@@ -69,3 +69,14 @@ class SourceLocal(SourceABC):
         return {
             'local_path': self.path
         }
+
+
+class SourceContainer(SourceABC):
+    image_name: str
+
+    @property
+    def execution_json(self):
+        return {
+            'image_name': self.image_name
+        }
+
