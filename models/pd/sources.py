@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from pydantic import BaseModel, validator, AnyUrl, parse_obj_as, root_validator, constr
-from typing import Optional
+from typing import Optional, Union
 
 
 class SourceABC(ABC, BaseModel):
@@ -51,8 +51,8 @@ class SourceGitHTTPS(SourceABC):
 
 
 class SourceArtifact(SourceABC):
-    file: str
     file_meta: Optional[dict]
+    file: Union[str, dict]
 
     @property
     def execution_json(self):

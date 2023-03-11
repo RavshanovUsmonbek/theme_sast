@@ -54,17 +54,16 @@ const SourceCard = {
             get_active_tab,
             get: () => {
                 const active_tab = get_active_tab()
-                if (active_tab == "artifact"){
-                    mappings = tab_mapping[active_tab].input_mapping                   
-                    file = el.find(mappings['file'])[0].files[0]
-                    return {"name": active_tab, "file": file}
+                let mapping_obj = Object.entries(tab_mapping[active_tab].input_mapping).reduce(
+                        (acc, item) => {
+                            acc[item[0]] = el.find(item[1]).val()
+                            return acc
+                        }, {name: active_tab})
+
+                if ($('#file')[0].files[0] !== undefined) {
+                    mapping_obj.file = $('#file')[0].files[0]
                 }
-                return Object.entries(tab_mapping[active_tab].input_mapping).reduce(
-                    (acc, item) => {
-                        acc[item[0]] = el.find(item[1]).val()
-                        return acc
-                    }, {name: active_tab})
-                
+                return mapping_obj
             },
             set: data => {
                 Object.entries(data).forEach(([k, v]) => {
